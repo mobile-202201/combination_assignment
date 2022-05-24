@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onStart() {  //로그인 되면 메뉴바에 로그인 텍스트 로그아웃으로 바꾸기 + 질병 검색 띄우기
         if(loginChecked()){
-//            MenuItem login_menu = menu.findItem(R.id.login);
-//            login_menu.setTitle("로그아웃");
+            MenuItem login_menu = menu.findItem(R.id.loginMenu);
+            login_menu.setTitle("로그아웃");
 
         }
         super.onStart();
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (loginChecked()){
             menu.add(Menu.NONE,3,Menu.NONE,"질병 검색");
         }
+        this.menu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent;
         switch (item.getItemId()){
-            case R.id.login:    //로그인 액티비티 이동
+            case R.id.loginMenu:    //로그인 액티비티 이동
                 if(loginChecked()){ //로그인 되어있으면 로그아웃 버튼 사용. 로그아웃 되면 프리퍼런스 값 사라지고 로그인 버튼으로 바뀜.
                     SharedPreferences prefs = getSharedPreferences("person_info", 0);
                     SharedPreferences.Editor editor = prefs.edit();
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Toast alreadyLogin = Toast.makeText(this.getApplicationContext(), "로그아웃 성공", Toast.LENGTH_SHORT);
                     alreadyLogin.show();
 
-                    menu.findItem(R.id.login).setTitle("로그인");  //메뉴바에 로그아웃 텍스트 로그인으로 다시 바꾸기
+                    menu.findItem(R.id.loginMenu).setTitle("로그인");  //메뉴바에 로그아웃 텍스트 로그인으로 다시 바꾸기
 
                 }
                 else{

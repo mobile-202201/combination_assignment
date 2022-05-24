@@ -33,7 +33,7 @@
         android:id="@+id/container">
 
         <fragment
-            android:name="com.example.example01.AddDFragment"
+            android:name="com.example.assignment.AddFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/addFragment"/>
