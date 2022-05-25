@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,7 +48,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if(loginChecked()){
             MenuItem login_menu = menu.findItem(R.id.loginMenu);
             login_menu.setTitle("로그아웃");
-
+            if (loginChecked()){
+                //menu.add(Menu.NONE,3,Menu.NONE,"질병 검색");
+                //가산점 하위메뉴
+                SubMenu subMenu = menu.addSubMenu("전염병 검색");
+                subMenu.add(Menu.NONE,3,Menu.NONE,"수두");
+                subMenu.add(Menu.NONE,4,Menu.NONE,"A형 간염");
+                subMenu.add(Menu.NONE,5,Menu.NONE,"유행성 이하선염");
+                subMenu.add(Menu.NONE,6,Menu.NONE,"C형 간염");
+                subMenu.add(Menu.NONE,7,Menu.NONE,"쯔쯔가무시병");
+            }
         }
         super.onStart();
     }
@@ -56,13 +66,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -78,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main,menu);
-        if (loginChecked()){
-            menu.add(Menu.NONE,3,Menu.NONE,"질병 검색");
-        }
         this.menu = menu;
         return super.onCreateOptionsMenu(menu);
     }
@@ -121,7 +121,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 break;
 
-            case 3: //질병 검색
+            case 3: //질병 검색(수두)
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case 4: //질병 검색(A형 간염)
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case 5: //질병 검색(유행성 이하선염)
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case 6: //질병 검색(C형 간염)
+                intent = new Intent(this,SearchActivity.class);
+                startActivity(intent);
+                return true;
+
+            case 7: //질병 검색(쯔쯔가무시병)
                 intent = new Intent(this,SearchActivity.class);
                 startActivity(intent);
                 return true;
