@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Corona/combination_assignment/app/src/main/res/layout/activity_list_detail.xml" value="0.1466565349544073" />
+        <entry key="..\:/Corona/combination_assignment/app/src/main/res/layout/fragment_add.xml" value="0.11170212765957446" />
+        <entry key="..\:/Corona/combination_assignment/app/src/main/res/layout/fragment_edit.xml" value="0.1466565349544073" />
+        <entry key="..\:/Corona/combination_assignment/app/src/main/res/menu/menu_main.xml" value="0.2675925925925926" />
         <entry key="..\:/Users/m_yun/AndroidStudioProjects/Assignment/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/m_yun/AndroidStudioProjects/Assignment/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Users/m_yun/AndroidStudioProjects/Assignment/app/src/main/res/menu/menu_main.xml" value="0.1" />

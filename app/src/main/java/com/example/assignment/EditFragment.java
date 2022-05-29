@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +59,43 @@ public class EditFragment extends Fragment {
         }
     }
 
+    //spinner사용
+    private Spinner spinner;
+    private String[] items = {"수두", "A형 간염", "유행성 이하선염", "C형 간염", "쯔쯔가무시병"};
+
+    private String spinnerSelected = ""; //스피너에서 선택된 질병 종류
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit, container, false);
+        View v = inflater.inflate(R.layout.fragment_edit, container, false);
+
+
+
+        //스피너 초기화
+        spinner = v.findViewById(R.id.spinner2);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+        Button mybutton = v.findViewById(R.id.Fragment_Edit_Button); //프레그먼트 내에서 버튼을 사용할 땐 onClick()메서드를 오버라이드 해줘야 함.
+
+        mybutton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //선택된 항목 인덱스 얻기
+                int pos1 = spinner.getSelectedItemPosition();
+                //선택된 항목 데이터 얻기
+                spinnerSelected = items[pos1];
+
+                //getActivity()는 액티비티에서 보여준다는 뜻.
+                Toast.makeText(getActivity(), "질병이 변경되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return v;
     }
 }
