@@ -3,26 +3,9 @@
     <item
         android:id="@+id/logoutMenu"
         android:title="로그아웃"/>
-    <item android:title="전염병 검색">
-        <menu>
-            <item
-                android:id="@+id/search01"
-                android:title="수두"/>
-<!--                title 메뉴를 데이터에서 불러오기-->
-            <item
-                android:id="@+id/search02"
-                android:title="A형 간염"/>
-            <item
-                android:id="@+id/search03"
-                android:title="유행성 이하선염"/>
-            <item
-                android:id="@+id/search04"
-                android:title="C형 간염"/>
-            <item
-                android:id="@+id/search05"
-                android:title="쯔쯔가무시병"/>
-        </menu>
-    </item>
+    <item
+        android:id="@+id/search"
+        android:title="전염병 검색" />
     <item
         android:id="@+id/edit"
         android:title="전염병 추가/편집"/>

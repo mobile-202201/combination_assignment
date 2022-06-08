@@ -1,4 +1,4 @@
-package com.example.json1;
+package com.example.assignment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -45,14 +45,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHoldler> {
     ArrayList<emergence> em = new ArrayList<emergence>();
     @NonNull
     @Override
-    public DataAdapter.ViewHoldler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHoldler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_list,parent,false);
         return new ViewHoldler(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DataAdapter.ViewHoldler holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHoldler holder, int position) {
 
         emergence emdata = em.get(position);
         holder.setItem(emdata);

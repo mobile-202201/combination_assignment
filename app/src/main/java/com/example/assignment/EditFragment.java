@@ -1,5 +1,7 @@
 package com.example.assignment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -66,6 +69,12 @@ public class EditFragment extends Fragment {
     private String spinnerSelected = ""; //스피너에서 선택된 질병 종류
 
 
+    private String hospital_name_edit = ""; //병원명
+    private double latitude_edit = 0;//위도
+    private double longitude_edit = 0;//경도
+    private String oH_edit = "";//영업시간
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,9 +82,17 @@ public class EditFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_edit, container, false);
 
 
+        EditText editPage_Hospitalname = (EditText) v.findViewById(R.id.hospitalname_edit);
+
+        EditText editPage_latitude = (EditText) v.findViewById(R.id.latitude_edit);
+
+        EditText editPage_longitude = (EditText) v.findViewById(R.id.longitude_edit);
+
+        EditText editPage_opentime = (EditText) v.findViewById(R.id.opentime_edit);
+
 
         //스피너 초기화
-        spinner = v.findViewById(R.id.spinner2);
+        spinner = v.findViewById(R.id.spinner_edit);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -83,13 +100,23 @@ public class EditFragment extends Fragment {
 
         Button mybutton = v.findViewById(R.id.Fragment_Edit_Button); //프레그먼트 내에서 버튼을 사용할 땐 onClick()메서드를 오버라이드 해줘야 함.
 
-        mybutton.setOnClickListener(new View.OnClickListener(){
+        mybutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //선택된 항목 인덱스 얻기
                 int pos1 = spinner.getSelectedItemPosition();
                 //선택된 항목 데이터 얻기
                 spinnerSelected = items[pos1];
+
+                hospital_name_edit = editPage_Hospitalname.getText().toString();
+                latitude_edit = Double.parseDouble(editPage_latitude.getText().toString());
+                longitude_edit = Double.parseDouble(editPage_longitude.getText().toString());
+                oH_edit = editPage_opentime.getText().toString();
+
+
+                Activity activity = getActivity();
+                ((EditFragment.Edit_DataSend) activity).onEditDataSend(spinnerSelected, hospital_name_edit, latitude_edit,longitude_edit,oH_edit);    //인터페이스로 값을 액티비티로 넘김.
+
 
                 //getActivity()는 액티비티에서 보여준다는 뜻.
                 Toast.makeText(getActivity(), "질병이 변경되었습니다.", Toast.LENGTH_SHORT).show();
@@ -97,5 +124,20 @@ public class EditFragment extends Fragment {
         });
 
         return v;
+
+    }
+    public interface Edit_DataSend {
+        void onEditDataSend(String data1, String data2, double data3, double data4, String data5);
+    }
+
+    private EditFragment.Edit_DataSend mEditDataSend;
+
+
+    @Override
+    public void onAttach (Context context){
+        super.onAttach(context);
+        if (getActivity() != null && getActivity() instanceof EditFragment.Edit_DataSend) {
+            mEditDataSend = (EditFragment.Edit_DataSend) getActivity();
+        }
     }
 }

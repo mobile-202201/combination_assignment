@@ -1,4 +1,4 @@
-package com.example.json1;
+package com.example.assignment;
 
 public class emergence {
     String region,patients,hospital_name

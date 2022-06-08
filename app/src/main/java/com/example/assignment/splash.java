@@ -1,6 +1,4 @@
-package com.example.spalsh;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.assignment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +7,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.window.SplashScreen;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.assignment.MainActivity;
 
 public class splash extends AppCompatActivity {
 
@@ -30,9 +31,9 @@ public class splash extends AppCompatActivity {
         mImage.startAnimation(animation);
         mText.startAnimation(anima);
 
-       //moveMain(4);
+       moveMain(2);
     }
-
+/*
     Animation.AnimationListener animationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
@@ -51,7 +52,7 @@ public class splash extends AppCompatActivity {
         }
     };
 
-/*
+*/
     private void moveMain(int sec){
         new Handler().postDelayed(new Runnable(){
             @Override
@@ -62,6 +63,6 @@ public class splash extends AppCompatActivity {
                 }
             }, 1000*sec);
     }
-*/
+
 
 }

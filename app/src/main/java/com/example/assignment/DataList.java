@@ -1,4 +1,4 @@
-package com.example.json1;
+package com.example.assignment;
 
 import java.util.ArrayList;
 

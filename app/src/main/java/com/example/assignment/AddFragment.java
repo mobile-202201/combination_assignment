@@ -1,5 +1,7 @@
 package com.example.assignment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +13,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,15 +74,42 @@ public class AddFragment extends Fragment {
 
     //spinner사용
     private Spinner spinner;
-    private String[] items = {"수두", "A형 간염", "유행성 이하선염", "C형 간염", "쯔쯔가무시병"};
+    private String[] items = {"수두", "A형간염", "유행성이하선염", "C형간염", "쯔쯔가무시병"};
 
     private String spinnerSelected = ""; //스피너에서 선택된 질병 종류
+
+    private String region = ""; //지역
+    private int patients = 0; //발생인원
+    private String hospital_name = ""; //병원명
+    private String hospital_address = ""; //병원위치
+    private double latitude = 0;//위도
+    private double longitude = 0;//경도
+    private String oH = "";//영업시간
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add, container, false);
+
+
+
+        EditText editArea = (EditText) v.findViewById(R.id.area);
+
+        EditText editPersonnel = (EditText) v.findViewById(R.id.personnel);
+
+        EditText editHospitalname = (EditText) v.findViewById(R.id.hospitalname);
+
+        EditText editHospitallocation = (EditText) v.findViewById(R.id.hospitallocation);
+
+        EditText editlatitude = (EditText) v.findViewById(R.id.latitude);
+
+        EditText editlongitude = (EditText) v.findViewById(R.id.longitude);
+
+        EditText editopentime = (EditText) v.findViewById(R.id.opentime);
+
 
 
 
@@ -96,6 +130,26 @@ public class AddFragment extends Fragment {
                 //선택된 항목 데이터 얻기
                 spinnerSelected = items[pos1];
 
+
+
+                region = editArea.getText().toString();
+                patients = Integer.parseInt(editPersonnel.getText().toString());
+                hospital_name = editHospitalname.getText().toString();
+                hospital_address = editHospitallocation.getText().toString();
+                latitude = Double.parseDouble(editlatitude.getText().toString());
+                longitude = Double.parseDouble(editlongitude.getText().toString());
+                oH = editopentime.getText().toString();
+
+                String rs = String.format("{\"region\":%s,\"patients\":%d,\"hospital_name\":%s,\"hospital_address\":%s,\"latitude\":%f,\"longitude\":%f,\"OH\":%s}", region, patients, hospital_name, hospital_address, latitude, longitude, oH);
+
+                Activity activity = getActivity();
+                ((DataSend)activity).onDataSend(rs, spinnerSelected);    //인터페이스로 값을 액티비티로 넘김.
+
+
+
+
+
+
                 //getActivity()는 액티비티에서 보여준다는 뜻.
                 Toast.makeText(getActivity(), "질병이 추가되었습니다.", Toast.LENGTH_SHORT).show();
             }
@@ -105,6 +159,23 @@ public class AddFragment extends Fragment {
         return v;
 
     }
+
+    public interface DataSend{
+        void onDataSend(String data1, String data2);
+    }
+
+    private DataSend mDataSend;
+
+
+
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(getActivity() != null && getActivity() instanceof DataSend){
+            mDataSend = (DataSend) getActivity();
+        }
+    }
+
 
 
 }

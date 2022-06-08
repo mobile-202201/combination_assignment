@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#CDECFA">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,15 +17,14 @@
             android:layout_height="wrap_content"
             android:text="추가"
             android:onClick="addOnClick"
-            android:layout_margin="20dp"/>
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="편집"
-            android:onClick="editOnClick"
-            android:layout_margin="20dp"/>
+            android:onClick="editOnClick"/>
     </LinearLayout>
 
     <FrameLayout
